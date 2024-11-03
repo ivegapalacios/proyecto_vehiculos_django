@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Iniciar Sesión</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}  <!-- Muestra el formulario de inicio de sesión -->
+        <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+    </form>
+</div>
+{% endblock %}

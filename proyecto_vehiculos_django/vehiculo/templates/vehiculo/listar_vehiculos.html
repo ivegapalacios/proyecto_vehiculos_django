@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Listado de Vehículos</h1>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Marca</th>
+            <th>Modelo</th>
+            <th>Serial Carrocería</th>
+            <th>Serial Motor</th>
+            <th>Categoría</th>
+            <th>Precio</th>
+            <th>Condición de Precio</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for vehiculo in vehiculos %}
+        <tr>
+            <td>{{ vehiculo.id }}</td>
+            <td>{{ vehiculo.marca }}</td>
+            <td>{{ vehiculo.modelo }}</td>
+            <td>{{ vehiculo.serial_carroceria }}</td>
+            <td>{{ vehiculo.serial_motor }}</td>
+            <td>{{ vehiculo.categoria }}</td>
+            <td>{{ vehiculo.precio }}</td>
+            <td>{{ vehiculo.get_condicion_precio }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="7" class="text-center">No hay vehículos registrados.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
