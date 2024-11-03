@@ -2,7 +2,7 @@
 Proyecto correspondiente a la práctica del módulo 6
 Bootcamp full stack 
 
-Credenciales de Admin Django (superuser):<br />
+Credenciales de Admin Django (superuser):<br /><br />
 User: admin<br />
 Password: super1234<br />
 
