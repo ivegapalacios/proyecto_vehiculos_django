@@ -10,25 +10,23 @@ from .models import Vehiculo
 # Create your views here.
 @login_required
 def index(request):
-    puede_agregar = request.user.has_perm('vehiculo.add_vehiculo') if request.user.is_authenticated else False
-    return render(request, 'vehiculo/index.html', {'puede_agregar': puede_agregar})
+    return render(request, 'vehiculo/index.html')
 
 class CustomLoginView(LoginView):
-    template_name = 'registration/login.html'
+    template_name = 'vehiculo/registration/login.html'
 
 @login_required
 def listar_vehiculos(request):
     vehiculos = Vehiculo.objects.all() #obtiene todos los vehiculos de la base de datos
     return render(request, 'vehiculo/listar_vehiculos.html', {'vehiculos': vehiculos})
 
-def index(request):
-    return render(request, 'vehiculo/index.html')
-
 def register(request):
     if request.method == "POST":
         form = UserRegistrationForm(request.POST)
         if form.is_valid():
-            user = form.save()
+            user = form.save(commit=False)
+            user.set_password(form.cleaned_data["password"])
+            user.save()
             #Asignar el permiso de visualizar catálogo
             permission = Permission.objects.get(codename='visualizar_catalogo')
             user.user_permissions.add(permission)
@@ -36,7 +34,7 @@ def register(request):
             return redirect('index')  #Redirigir a una página después del registro
     else:
         form = UserRegistrationForm()
-    return render(request, 'registration/register.html', {'form': form})
+    return render(request, 'vehiculo/registration/register.html', {'form': form})
 
 @login_required
 def add_vehiculo(request):
